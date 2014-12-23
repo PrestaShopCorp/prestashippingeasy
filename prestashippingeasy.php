@@ -10,7 +10,7 @@ class PrestaShippingEasy extends Module
 	{
 		$this->name = 'prestashippingeasy';
 		$this->tab = 'shipping_logistics';
-		$this->version = '1.4.1';
+		$this->version = '1.4.5';
 		$this->author = 'Shipping Easy';
 		$this->need_instance = 0;
 		$this->bootstrap = true;
@@ -197,7 +197,7 @@ class PrestaShippingEasy extends Module
 
 	public function hookBackOfficeHeader()
 	{
-		if (Tools::isSubmit('process_send') && Tools::getIsset($_POST['ship_order'])) {
+		if (Tools::isSubmit('process_send') && Tools::getValue('ship_order')) {
 			$order=new Order((int)Tools::getValue('ship_order'));
 			if (!$order->isVirtual()) {
 				$this->_setupLibrary();
@@ -240,8 +240,14 @@ class PrestaShippingEasy extends Module
 	private function _shipping_order_detail($order) {
 	    $temp = array();
 	    foreach ($order->getProducts() as $item) {
+			if ($item['product_attribute_id']!=0)
+			{
+				$product=new Product($item['product_id']);
+				$att=$product->getAttributeCombinationsById($item['product_attribute_id'],1);
+				$item['weight']=$item['weight']+$att[0]['weight'];
+			}
 
-			if (Configuration::get('PS_WEIGHT_UNIT')=='lb') {
+			if (Tools::strtolower(Configuration::get('PS_WEIGHT_UNIT'))=='lb' || Tools::strtolower(Configuration::get('PS_WEIGHT_UNIT'))=='lbs') {
 				$item['weight']=$item['weight']*16;
 			}
 
@@ -266,23 +272,22 @@ class PrestaShippingEasy extends Module
 	    return $temp;
 	}
 	private function _setupLibrary() {
-		// Load library now
-		require(dirname(__FILE__) . '/library/ShippingEasy.php');
+		require(__PS_BASE_URI__.'modules/'. $this->shippingeasy->name . '/lib/ShippingEasy.php');
 
 		// Errors
-		require(dirname(__FILE__) . '/library/Error.php');
-		require(dirname(__FILE__) . '/library/ApiError.php');
-		require(dirname(__FILE__) . '/library/ApiConnectionError.php');
-		require(dirname(__FILE__) . '/library/AuthenticationError.php');
-		require(dirname(__FILE__) . '/library/InvalidRequestError.php');
+		require(__PS_BASE_URI__.'modules/'. $this->shippingeasy->name . '/lib/Error.php');
+		require(__PS_BASE_URI__.'modules/'. $this->shippingeasy->name . '/lib/ApiError.php');
+		require(__PS_BASE_URI__.'modules/'. $this->shippingeasy->name . '/lib/ApiConnectionError.php');
+		require(__PS_BASE_URI__.'modules/'. $this->shippingeasy->name . '/lib/AuthenticationError.php');
+		require(__PS_BASE_URI__.'modules/'. $this->shippingeasy->name . '/lib/InvalidRequestError.php');
 
-		require(dirname(__FILE__) . '/library/ApiRequestor.php');
-		require(dirname(__FILE__) . '/library/Authenticator.php');
-		require(dirname(__FILE__) . '/library/Object.php');
-		require(dirname(__FILE__) . '/library/Order.php');
-		require(dirname(__FILE__) . '/library/Signature.php');
-		require(dirname(__FILE__) . '/library/SignedUrl.php');
-		require(dirname(__FILE__) . '/library/Cancellation.php');	
+		require(__PS_BASE_URI__.'modules/'. $this->shippingeasy->name . '/lib/ApiRequestor.php');
+		require(__PS_BASE_URI__.'modules/'. $this->shippingeasy->name . '/lib/Authenticator.php');
+		require(__PS_BASE_URI__.'modules/'. $this->shippingeasy->name . '/lib/Object.php');
+		require(__PS_BASE_URI__.'modules/'. $this->shippingeasy->name . '/lib/Order.php');
+		require(__PS_BASE_URI__.'modules/'. $this->shippingeasy->name . '/lib/Signature.php');
+		require(__PS_BASE_URI__.'modules/'. $this->shippingeasy->name . '/lib/SignedUrl.php');
+		require(__PS_BASE_URI__.'modules/'. $this->shippingeasy->name . '/lib/Cancellation.php');	
 
     	ShippingEasy::setApiKey(Configuration::get('SHIPPINGEASY_APIKEY'));
     	ShippingEasy::setApiSecret(Configuration::get('SHIPPINGEASY_APISECRET'));
