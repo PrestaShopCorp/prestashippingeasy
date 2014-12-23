@@ -93,7 +93,7 @@ class PrestaShippingEasy extends Module
 			),
 			'input' => array(
 				array(
-					'type' => 'switch',
+					'type' => 'radio',
 					'label' => $this->l('Live mode'),
 					'name' => 'SHIPPINGEASY_MODE',
 					'is_bool' => true,
