@@ -17,9 +17,9 @@
 				<li><strong>{l s='Lowest USPS Rates | Multi-Carrier.' mod='prestashippingeasy'}</strong> {l s='Commercial Plus Pricing saves you money over the rates available from PC Postage providers, including Stamps.com. Your negotiated rates with UPS and FedEx.' mod='prestashippingeasy'}</li>
 				<li><strong>{l s='Easy to use | Advanced automation:' mod='prestashippingeasy'}</strong> {l s='Simple software that helps you print labels fast. All the tools and options you need without the clutter. Split orders. Combine orders. Map orders. It\'s all here.' mod='prestashippingeasy'}</li>
 				<li><strong>{l s='We help | Onboarding:' mod='prestashippingeasy'}</strong> {l s='All plan users get the benefit of being walked through the set up process. Phone (855-202-2275), email, and chat forevermore.' mod='prestashippingeasy'}</li>
-			</ol><br /><br />
+			</ol><br /><br /><br />
 			<div class="text-center">
-			<a class="shipeasy-create-btn btn btn-default btn-lg" rel="external" href="http://shippingeasy.com/plans-pricing-prestashop/?se-ref=95d" target="_blank"><span>{l s='Get your FREE 30 day trial' mod='prestashippingeasy'}</span></a><br /><br /><br /><br />
+			<a class="shipeasy-create-btn btn btn-default btn-lg" rel="external" href="http://shippingeasy.com/plans-pricing-prestashop/?se-ref=95d" target="_blank"><span>{l s='Get your FREE 30 day trial' mod='prestashippingeasy'}</span></a><br /><br /><br /><br /><br />
 			</div>
 			<div style="clear: right"></div> 
 		</div>
@@ -41,7 +41,7 @@
 			<br />
 			{l s='Your "Callback Interface URL"' mod='prestashippingeasy'}
 			<br />
-			<input type="text" onclick="$(this).select()" value="{$callback_url|escape:html:'UTF-8'}" />
+			<input type="text" onclick="$(this).select()" value="{$callback_url|escape:html:'UTF-8'}" class="callbackurl" />
 		</p>
 	</div>
 	<div style="clear: both;"></div>
