@@ -11,22 +11,22 @@ class prestashippingeasycallbackModuleFrontController extends ModuleFrontControl
 		$this->shippingeasy = new PrestaShippingEasy();
 
 		// Load library now
-		require(dirname(__FILE__) . '/../../library/ShippingEasy.php');
+		require(__PS_BASE_URI__.'modules/'. $this->shippingeasy->name . '/lib/ShippingEasy.php');
 
 		// Errors
-		require(dirname(__FILE__) . '/../../library/Error.php');
-		require(dirname(__FILE__) . '/../../library/ApiError.php');
-		require(dirname(__FILE__) . '/../../library/ApiConnectionError.php');
-		require(dirname(__FILE__) . '/../../library/AuthenticationError.php');
-		require(dirname(__FILE__) . '/../../library/InvalidRequestError.php');
+		require(__PS_BASE_URI__.'modules/'. $this->shippingeasy->name . '/lib/Error.php');
+		require(__PS_BASE_URI__.'modules/'. $this->shippingeasy->name . '/lib/ApiError.php');
+		require(__PS_BASE_URI__.'modules/'. $this->shippingeasy->name . '/lib/ApiConnectionError.php');
+		require(__PS_BASE_URI__.'modules/'. $this->shippingeasy->name . '/lib/AuthenticationError.php');
+		require(__PS_BASE_URI__.'modules/'. $this->shippingeasy->name . '/lib/InvalidRequestError.php');
 
-		require(dirname(__FILE__) . '/../../library/ApiRequestor.php');
-		require(dirname(__FILE__) . '/../../library/Authenticator.php');
-		require(dirname(__FILE__) . '/../../library/Object.php');
-		require(dirname(__FILE__) . '/../../library/Order.php');
-		require(dirname(__FILE__) . '/../../library/Signature.php');
-		require(dirname(__FILE__) . '/../../library/SignedUrl.php');
-		require(dirname(__FILE__) . '/../../library/Cancellation.php');
+		require(__PS_BASE_URI__.'modules/'. $this->shippingeasy->name . '/lib/ApiRequestor.php');
+		require(__PS_BASE_URI__.'modules/'. $this->shippingeasy->name . '/lib/Authenticator.php');
+		require(__PS_BASE_URI__.'modules/'. $this->shippingeasy->name . '/lib/Object.php');
+		require(__PS_BASE_URI__.'modules/'. $this->shippingeasy->name . '/lib/Order.php');
+		require(__PS_BASE_URI__.'modules/'. $this->shippingeasy->name . '/lib/Signature.php');
+		require(__PS_BASE_URI__.'modules/'. $this->shippingeasy->name . '/lib/SignedUrl.php');
+		require(__PS_BASE_URI__.'modules/'. $this->shippingeasy->name . '/lib/Cancellation.php');
 
 		$values = Tools::file_get_contents('php://input');
 		$output = Tools::jsonDecode($values, true);
