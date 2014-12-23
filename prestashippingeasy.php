@@ -272,22 +272,22 @@ class PrestaShippingEasy extends Module
 	    return $temp;
 	}
 	private function _setupLibrary() {
-		require(__PS_BASE_URI__.'modules/'. $this->name . '/lib/ShippingEasy.php');
+		require(_PS_ROOT_DIR_.'/modules/'. $this->name . '/lib/ShippingEasy.php');
 
 		// Errors
-		require(__PS_BASE_URI__.'modules/'. $this->name . '/lib/Error.php');
-		require(__PS_BASE_URI__.'modules/'. $this->name . '/lib/ApiError.php');
-		require(__PS_BASE_URI__.'modules/'. $this->name . '/lib/ApiConnectionError.php');
-		require(__PS_BASE_URI__.'modules/'. $this->name . '/lib/AuthenticationError.php');
-		require(__PS_BASE_URI__.'modules/'. $this->name . '/lib/InvalidRequestError.php');
+		require(_PS_ROOT_DIR_.'/modules/'. $this->name . '/lib/Error.php');
+		require(_PS_ROOT_DIR_.'/modules/'. $this->name . '/lib/ApiError.php');
+		require(_PS_ROOT_DIR_.'/modules/'. $this->name . '/lib/ApiConnectionError.php');
+		require(_PS_ROOT_DIR_.'/modules/'. $this->name . '/lib/AuthenticationError.php');
+		require(_PS_ROOT_DIR_.'/modules/'. $this->name . '/lib/InvalidRequestError.php');
 
-		require(__PS_BASE_URI__.'modules/'. $this->name . '/lib/ApiRequestor.php');
-		require(__PS_BASE_URI__.'modules/'. $this->name . '/lib/Authenticator.php');
-		require(__PS_BASE_URI__.'modules/'. $this->name . '/lib/Object.php');
-		require(__PS_BASE_URI__.'modules/'. $this->name . '/lib/Order.php');
-		require(__PS_BASE_URI__.'modules/'. $this->name . '/lib/Signature.php');
-		require(__PS_BASE_URI__.'modules/'. $this->name . '/lib/SignedUrl.php');
-		require(__PS_BASE_URI__.'modules/'. $this->name . '/lib/Cancellation.php');	
+		require(_PS_ROOT_DIR_.'/modules/'. $this->name . '/lib/ApiRequestor.php');
+		require(_PS_ROOT_DIR_.'/modules/'. $this->name . '/lib/Authenticator.php');
+		require(_PS_ROOT_DIR_.'/modules/'. $this->name . '/lib/Object.php');
+		require(_PS_ROOT_DIR_.'/modules/'. $this->name . '/lib/Order.php');
+		require(_PS_ROOT_DIR_.'/modules/'. $this->name . '/lib/Signature.php');
+		require(_PS_ROOT_DIR_.'/modules/'. $this->name . '/lib/SignedUrl.php');
+		require(_PS_ROOT_DIR_.'/modules/'. $this->name . '/lib/Cancellation.php');		
 
     	ShippingEasy::setApiKey(Configuration::get('SHIPPINGEASY_APIKEY'));
     	ShippingEasy::setApiSecret(Configuration::get('SHIPPINGEASY_APISECRET'));
