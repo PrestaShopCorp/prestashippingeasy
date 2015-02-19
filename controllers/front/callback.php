@@ -28,10 +28,23 @@ class prestashippingeasycallbackModuleFrontController extends ModuleFrontControl
 		require(_PS_ROOT_DIR_.'/modules/'. $this->shippingeasy->name . '/lib/SignedUrl.php');
 		require(_PS_ROOT_DIR_.'/modules/'. $this->shippingeasy->name . '/lib/Cancellation.php');
 
+		ShippingEasy::setApiKey(Configuration::get('SHIPPINGEASY_APIKEY'));
+        ShippingEasy::setApiSecret(Configuration::get('SHIPPINGEASY_APISECRET'));
+        if (!Configuration::get('SHIPPINGEASY_MODE'))
+                ShippingEasy::setApiBase('https://staging.shippingeasy.com');
+
 		$values = Tools::file_get_contents('php://input');
 		$output = Tools::jsonDecode($values, true);
+		$context=Context::getContext();
+		$url=parse_url($context->link->getModuleLink('prestashippingeasy', 'callback', array(), false));
 
-      	if ($output)
+		$api_signature=Tools::getValue('api_signature');
+		if (strpos($api_signature, "?"))
+			$api_signature=substr($api_signature, 0, strpos($api_signature, "?"));
+
+		$authenticator = new ShippingEasy_Authenticator('POST', $url['path'], array("api_signature"=>$api_signature), $values);
+
+		if ($authenticator->isAuthenticated())
       	{
 	      	$order_id = $output['shipment']['orders'][0]['external_order_identifier'];
 	        $tracking_number = $output['shipment']['tracking_number'];
