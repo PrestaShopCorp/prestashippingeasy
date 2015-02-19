@@ -10,7 +10,7 @@ class PrestaShippingEasy extends Module
 	{
 		$this->name = 'prestashippingeasy';
 		$this->tab = 'shipping_logistics';
-		$this->version = '1.4.5';
+		$this->version = '1.4.6';
 		$this->author = 'Shipping Easy';
 		$this->need_instance = 0;
 		$this->bootstrap = true;
